@@ -4,6 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.salesforce.oauth.SalesforceAuth;
+
+import config.ConfigManager;
+import driver.DriverFactory;
+
 public class LoginPage extends BasePage {
 
 
@@ -50,8 +55,16 @@ public class LoginPage extends BasePage {
 			return "";
 		}
 	}
+	
+	public String getPassword() {
+		if(password.isDisplayed()) {
+			return password.getAttribute("value");
+		} else {
+			return "";
+		}
+	}
 
-	public void clearPassword(String pass) {
+	public void clearPassword() {
 		if (password.isDisplayed()) {
 			password.clear();
 		}
@@ -81,5 +94,11 @@ public class LoginPage extends BasePage {
 
 	public void clickForgotPassword() {
 		forgotPasswordLink.click();
+	}
+	
+	public void loginToApp() throws Exception {
+		SalesforceAuth login = new SalesforceAuth(ConfigManager.get("consumer.key"),ConfigManager.get("consumer.secret"), false);
+		String url = login.start();
+		DriverFactory.getDriver().navigate().to(url);
 	}
 }

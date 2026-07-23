@@ -1,3 +1,6 @@
+src/main/resources/config/local.properties
+*/local.properties
+/test-output
 /target
 *.class
 .settings
