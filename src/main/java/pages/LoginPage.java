@@ -11,7 +11,6 @@ import driver.DriverFactory;
 
 public class LoginPage extends BasePage {
 
-
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
@@ -47,17 +46,17 @@ public class LoginPage extends BasePage {
 			password.sendKeys(pass);
 		}
 	}
-	
+
 	public String getUsername() {
-		if(username.isDisplayed()) {
+		if (username.isDisplayed()) {
 			return username.getAttribute("value");
 		} else {
 			return "";
 		}
 	}
-	
+
 	public String getPassword() {
-		if(password.isDisplayed()) {
+		if (password.isDisplayed()) {
 			return password.getAttribute("value");
 		} else {
 			return "";
@@ -83,6 +82,7 @@ public class LoginPage extends BasePage {
 
 	/**
 	 * THis function will fetch the error message if login fails
+	 * 
 	 * @return
 	 */
 	public String getLoginErrorMessage() {
@@ -95,9 +95,10 @@ public class LoginPage extends BasePage {
 	public void clickForgotPassword() {
 		forgotPasswordLink.click();
 	}
-	
+
 	public void loginToApp() throws Exception {
-		SalesforceAuth login = new SalesforceAuth(ConfigManager.get("consumer.key"),ConfigManager.get("consumer.secret"), false);
+		SalesforceAuth login = new SalesforceAuth(ConfigManager.get("consumer.key"),
+				ConfigManager.get("consumer.secret"), false);
 		String url = login.start();
 		DriverFactory.getDriver().navigate().to(url);
 	}

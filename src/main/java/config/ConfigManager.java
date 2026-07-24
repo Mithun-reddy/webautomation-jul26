@@ -10,6 +10,7 @@ public class ConfigManager {
 
 	static {
 		load("config/config.properties");
+		load("config/local.properties");
 	}
 
 	private ConfigManager() {

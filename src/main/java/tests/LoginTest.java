@@ -1,16 +1,22 @@
 package tests;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import config.ConfigManager;
+import driver.DriverFactory;
+import listeners.TestListener;
 import pages.LoginPage;
 
+@Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
 
-//	@Test
+	@Test
 	public static void loginErrorMessage_TC01() {
+		WebDriver driver = DriverFactory.getDriver();
 		LoginPage lp = new LoginPage(driver);
 		driver.get(ConfigManager.get("app.url"));
 		lp.enterUsername(ConfigManager.get("sfdc.username"));
@@ -24,6 +30,7 @@ public class LoginTest extends BaseTest {
 	
 	@Test
 	public static void usermenu() throws Exception {
+		WebDriver driver = DriverFactory.getDriver();
 		LoginPage lp = new LoginPage(driver);
 		lp.loginToApp();
 		driver.navigate().refresh();

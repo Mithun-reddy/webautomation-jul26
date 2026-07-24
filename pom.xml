@@ -5,8 +5,10 @@
 	<groupId>com.tekarch.jul26</groupId>
 	<artifactId>salesforce-automation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<properties>
 
+
+	<properties>
+		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -31,5 +33,13 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.5.1</version>
 		</dependency>
+		<!-- Source:
+		https://mvnrepository.com/artifact/com.aventstack/chaintest-testng -->
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>chaintest-testng</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 	</dependencies>
+
 </project>

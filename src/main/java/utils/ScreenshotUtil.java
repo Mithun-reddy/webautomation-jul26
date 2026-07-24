@@ -26,7 +26,7 @@ public final class ScreenshotUtil {
 		
 	}
 	
-	public static String captureScreenshot() throws IOException {
+	public static File captureScreenshot() throws IOException {
 		String date = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
 		Path target = Path.of("src/main/resources/screenshots","_"+date+".png");
 		if(DriverFactory.getDriver()== null) {
@@ -35,7 +35,7 @@ public final class ScreenshotUtil {
 			Files.createDirectories(target.getParent());
 			File source = ((TakesScreenshot)DriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(source, target.toFile());
-			return target.toString();
+			return target.toFile();
 		}
 	}
 	
