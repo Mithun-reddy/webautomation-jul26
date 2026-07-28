@@ -9,11 +9,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
+import com.aventstack.chaintest.plugins.ChainTestListener;
+
 import driver.DriverFactory;
 import listeners.TestListener;
 
 
-@Listeners(TestListener.class)
+@Listeners({ChainTestListener.class ,TestListener.class})
 public class BaseTest {
 //	protected static WebDriver driver = null; 
 	

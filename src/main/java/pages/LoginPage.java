@@ -1,5 +1,7 @@
 package pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +12,7 @@ import config.ConfigManager;
 import driver.DriverFactory;
 
 public class LoginPage extends BasePage {
+	private static final Logger LOG = LogManager.getLogger(LoginPage.class);
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -38,17 +41,20 @@ public class LoginPage extends BasePage {
 	public void enterUsername(String userID) {
 		if (username.isDisplayed()) {
 			username.sendKeys(userID);
+			LOG.info("Entered username");
 		}
 	}
 
 	public void enterPassword(String pass) {
 		if (password.isDisplayed()) {
 			password.sendKeys(pass);
+			LOG.info("Entered password (check config)");
 		}
 	}
 
 	public String getUsername() {
 		if (username.isDisplayed()) {
+			LOG.info("Attribute value fetched is: ",username.getAttribute("value"));
 			return username.getAttribute("value");
 		} else {
 			return "";
@@ -76,7 +82,7 @@ public class LoginPage extends BasePage {
 		if (!rememberMeCheckbox.isSelected()) {
 			rememberMeCheckbox.click();
 		} else {
-			System.out.println("Checkbox is already selected");
+			LOG.info("Checkbox is already selected");
 		}
 	}
 

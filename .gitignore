@@ -1,3 +1,4 @@
+/logs
 src/main/resources/config/local.properties
 */local.properties
 /test-output
@@ -8,3 +9,4 @@ src/main/resources/config/local.properties
 .classpath
 .DS_Store
 .git
+*.png

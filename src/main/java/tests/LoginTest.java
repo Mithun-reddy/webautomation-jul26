@@ -1,5 +1,7 @@
 package tests;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -11,8 +13,10 @@ import driver.DriverFactory;
 import listeners.TestListener;
 import pages.LoginPage;
 
-@Listeners(TestListener.class)
+//@Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
+	private static final Logger LOG = LogManager.getLogger(LoginTest.class);
+	
 
 	@Test
 	public static void loginErrorMessage_TC01() {

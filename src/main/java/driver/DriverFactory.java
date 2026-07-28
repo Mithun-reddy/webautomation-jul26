@@ -1,5 +1,7 @@
 package driver;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,18 +12,23 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 import config.ConfigManager;
+import tests.LoginTest;
 
 public final class DriverFactory {
 
 	private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<WebDriver>();
-
+	private static final Logger LOG = LogManager.getLogger(DriverFactory.class);
+	
 	private DriverFactory() {
 
 	}
 
 	public static void createDriver() {
+		LOG.info("Creating driver");
 		String browser = ConfigManager.get("browser").toLowerCase();
+		LOG.info("browser being configured", browser);
 		boolean headless = ConfigManager.getBoolean("headless");
+		LOG.info("is headless browser ", headless);
 		WebDriver driver = null;
 		switch (browser) {
 		case "chrome":
@@ -34,7 +41,7 @@ public final class DriverFactory {
 			driver = new FirefoxDriver(options(new FirefoxOptions(), headless));
 			break;
 		default:
-			System.out.println("Config does not contain a valid browser name defaulting to chrome browser");
+			LOG.warn("check configuration browser name is missing and defaulting to chrome browser ");
 			driver = new ChromeDriver();
 			break;
 		}
@@ -75,5 +82,12 @@ public final class DriverFactory {
 		options.setCapability("--disable-notifications", headless);
 		return options;
 	}
+	
+	//TRACE: DEtailed steps 
+	//DEBUG: Calculated values, input values
+	//INFO : normal application started
+//	WARN: Retry
+//	ERROR: Failure
+//	FATAL: Application cannot run
 
 }
