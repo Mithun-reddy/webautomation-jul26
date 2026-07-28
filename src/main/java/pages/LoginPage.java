@@ -102,10 +102,12 @@ public class LoginPage extends BasePage {
 		forgotPasswordLink.click();
 	}
 
-	public void loginToApp() throws Exception {
+	public HomePageLightningXp loginToApp() throws Exception {
 		SalesforceAuth login = new SalesforceAuth(ConfigManager.get("consumer.key"),
 				ConfigManager.get("consumer.secret"), false);
 		String url = login.start();
-		DriverFactory.getDriver().navigate().to(url);
+		WebDriver driver = DriverFactory.getDriver();
+		driver.navigate().to(url);
+		return new HomePageLightningXp(driver);
 	}
 }

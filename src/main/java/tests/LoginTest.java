@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
 	}
 	
 	@Test
-	public static void usermenu() throws Exception {
+	public static void userMenu_TC05() throws Exception {
 		WebDriver driver = DriverFactory.getDriver();
 		LoginPage lp = new LoginPage(driver);
 		lp.loginToApp();
