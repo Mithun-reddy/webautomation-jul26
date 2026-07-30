@@ -1,13 +1,12 @@
 package tests;
 
-import java.util.ArrayList;
-import java.util.NavigableMap;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import config.ConfigManager;
+import config.RetryAnalyzer;
 import constants.FileConstants;
 import driver.DriverFactory;
 import pages.HomePageLightningXp;
@@ -17,7 +16,7 @@ import pages.NavigationLinkMenu;
 
 public class MyProfileTest extends BaseTest {
 	
-	@Test
+	@Test(groups = {"regression", "smoke"})
 	public static void myProfile_TC6() throws Exception {
 		WebDriver driver = DriverFactory.getDriver();
 		LoginPage lp = new LoginPage(driver);

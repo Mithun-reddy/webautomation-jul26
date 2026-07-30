@@ -9,16 +9,18 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import config.ConfigManager;
+import config.RetryAnalyzer;
 import driver.DriverFactory;
+import listeners.RetryTransformer;
 import listeners.TestListener;
 import pages.LoginPage;
 
-//@Listeners(TestListener.class)
+
 public class LoginTest extends BaseTest {
 	private static final Logger LOG = LogManager.getLogger(LoginTest.class);
 	
 
-	@Test
+	@Test(groups = {"smoke", "regression"})
 	public static void loginErrorMessage_TC01() {
 		WebDriver driver = DriverFactory.getDriver();
 		LoginPage lp = new LoginPage(driver);
@@ -32,7 +34,7 @@ public class LoginTest extends BaseTest {
 		Assert.assertEquals(actualErrorMessage, ConfigManager.get("login.error.message"));
 	}
 	
-	@Test
+	@Test(groups = "regression")
 	public static void userMenu_TC05() throws Exception {
 		WebDriver driver = DriverFactory.getDriver();
 		LoginPage lp = new LoginPage(driver);

@@ -18,14 +18,15 @@ public final class DriverFactory {
 
 	private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<WebDriver>();
 	private static final Logger LOG = LogManager.getLogger(DriverFactory.class);
-	
+
 	private DriverFactory() {
 
 	}
 
-	public static void createDriver() {
+	public static void createDriver(String browserName) {
 		LOG.info("Creating driver");
-		String browser = ConfigManager.get("browser").toLowerCase();
+		String browser = (browserName == null) ? ConfigManager.get("browser").toLowerCase() : browserName;
+		
 		LOG.info("browser being configured", browser);
 		boolean headless = ConfigManager.getBoolean("headless");
 		LOG.info("is headless browser ", headless);
@@ -47,45 +48,45 @@ public final class DriverFactory {
 		}
 		DRIVER.set(driver);
 	}
-	
+
 	public static WebDriver getDriver() {
 		return DRIVER.get();
 	}
-	
+
 	public static void quitDriver() {
-		if(DRIVER.get()!= null) {
+		if (DRIVER.get() != null) {
 			DRIVER.get().quit();
 			DRIVER.remove();
 		}
 	}
-	
+
 	private static ChromeOptions options(ChromeOptions options, boolean headless) {
-		if(headless) {
+		if (headless) {
 			options.addArguments("--headless");
-		} 
+		}
 		options.addArguments("--disable-notifications");
 		return options;
 	}
-	
+
 	private static FirefoxOptions options(FirefoxOptions options, boolean headless) {
-		if(headless) {
+		if (headless) {
 			options.addArguments("--headless");
-		} 
+		}
 		options.addArguments("--disable-notifications");
 		return options;
 	}
-	
+
 	private static SafariOptions options(SafariOptions options, boolean headless) {
-		if(headless) {
+		if (headless) {
 			options.setCapability("", headless);
-		} 
+		}
 		options.setCapability("--disable-notifications", headless);
 		return options;
 	}
-	
-	//TRACE: DEtailed steps 
-	//DEBUG: Calculated values, input values
-	//INFO : normal application started
+
+	// TRACE: DEtailed steps
+	// DEBUG: Calculated values, input values
+	// INFO : normal application started
 //	WARN: Retry
 //	ERROR: Failure
 //	FATAL: Application cannot run
