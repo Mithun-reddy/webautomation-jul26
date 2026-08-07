@@ -1,0 +1,14 @@
+{
+	"login": {
+		"endpoint": "/login",
+		"expectedStatusCode": "201",
+		"payload": {
+			"username": "mithun@ta.com",
+			"password": "mithun"
+		}
+	},
+	"getData": {
+		"endpoint": "/getdata",
+		"expectedStatusCode": "200"
+	}
+}
